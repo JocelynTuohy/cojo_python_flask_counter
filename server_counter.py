@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, session
+from flask import Flask, render_template, redirect, session, request
 # import re
 
 app = Flask(__name__)
@@ -16,7 +16,10 @@ def index():
 
 @app.route('/countTwo', methods=['POST'])
 def counter():
-    session['count'] += 1
+    if request.form['submit'] == 'plusTwo':
+        session['count'] += 1
+    elif request.form['submit'] == 'reset':
+        session['count'] = 0
     return redirect('/')
 
 app.run(debug=True)
