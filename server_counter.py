@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, redirect, session
 # import re
 
 app = Flask(__name__)
@@ -14,9 +14,9 @@ def index():
         session['count'] = 0
     return render_template('index.html')
 
-# @app.route('/counter')
-# def counter():
-#     session['count']
-#     return redirect('/')
+@app.route('/countTwo', methods=['POST'])
+def counter():
+    session['count'] += 1
+    return redirect('/')
 
 app.run(debug=True)
